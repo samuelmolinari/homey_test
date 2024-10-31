@@ -9,4 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true
+
+  has_many :project_users, dependent: :destroy
+  has_many :projects, through: :project_users
 end

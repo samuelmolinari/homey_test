@@ -16,7 +16,10 @@ RSpec.describe "/projects", type: :request do
   let(:user) { create(:user) }
   let(:project) { create(:project, valid_attributes) }
 
-  before { sign_in user }
+  before do
+    create(:project_user, user: user, project: project)
+    sign_in user
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Project. As you add validations to Project, be sure to

@@ -13,4 +13,9 @@ RSpec.describe User, type: :model do
   context 'encryption' do
     it { should encrypt(:email).deterministic(true) }
   end
+
+  context 'associations' do
+    it { should have_many(:project_users) }
+    it { should have_many(:projects).through(:project_users) }
+  end
 end
