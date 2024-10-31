@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_31_185339) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_31_195641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_185339) do
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_comments_on_project_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "trackable_type", null: false
+    t.bigint "trackable_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_events_on_project_id"
+    t.index ["trackable_type", "trackable_id"], name: "index_events_on_trackable"
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -67,6 +77,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_185339) do
 
   add_foreign_key "comments", "projects"
   add_foreign_key "comments", "users"
+  add_foreign_key "events", "projects"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "status_changes", "projects"

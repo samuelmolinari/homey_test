@@ -19,5 +19,19 @@ RSpec.describe StatusChange, type: :model do
   context 'associations' do
     it { should belong_to(:project) }
     it { should belong_to(:user) }
+    it { should have_many(:events).dependent(:destroy) }
+  end
+
+  context 'on create' do
+    subject { build(:status_change) }
+
+    it 'creates an event' do
+      expect { subject.save! }.to change(Event, :count).by(1)
+
+      event = Event.last
+
+      expect(event.project).to eq(subject.project)
+      expect(event.trackable).to eq(subject)
+    end
   end
 end

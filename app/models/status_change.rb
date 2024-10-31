@@ -1,4 +1,6 @@
 class StatusChange < ApplicationRecord
+  include Trackable
+
   belongs_to :user
   belongs_to :project
 
