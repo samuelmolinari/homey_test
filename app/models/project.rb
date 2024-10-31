@@ -12,4 +12,5 @@ class Project < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
   has_many :comments, dependent: :destroy
+  has_many :status_changes, dependent: :destroy
 end

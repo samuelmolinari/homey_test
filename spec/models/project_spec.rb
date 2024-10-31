@@ -11,5 +11,6 @@ RSpec.describe Project, type: :model do
     it { should have_many(:project_users).dependent(:destroy) }
     it { should have_many(:users).through(:project_users) }
     it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:status_changes).dependent(:destroy) }
   end
 end
