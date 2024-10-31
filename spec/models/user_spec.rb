@@ -15,7 +15,8 @@ RSpec.describe User, type: :model do
   end
 
   context 'associations' do
-    it { should have_many(:project_users) }
+    it { should have_many(:project_users).dependent(:destroy) }
     it { should have_many(:projects).through(:project_users) }
+    it { should have_many(:comments).dependent(:destroy) }
   end
 end
