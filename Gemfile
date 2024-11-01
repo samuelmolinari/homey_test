@@ -57,7 +57,8 @@ group :development do
   gem "web-console"
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
-  gem "error_highlight", ">= 0.4.0", platforms: [ :ruby ]
+  # TODO: Solve failure when running in CI
+  # gem "error_highlight", ">= 0.4.0", platforms: [ :ruby ],
 end
 
 group :test do
