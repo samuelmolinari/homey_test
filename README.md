@@ -1,5 +1,30 @@
 # Homey code test
 
+## Instructions
+
+### Requirements:
+
+- Ruby 3.1.3
+- PostgreSQL
+
+### Setup app:
+
+```bash
+bin/setup
+```
+
+### Run tests:
+
+```bash
+bin/rails spec
+```
+
+### Run app:
+
+```bash
+bin/dev
+```
+
 ## Task
 
 Use Ruby on Rails to build a project conversation history. A user should be able to:
@@ -61,3 +86,20 @@ One drawback is the duplication of the foreign key `project_id` that will be fou
 ### Limitations
 
 Obivously beind limited on time, the solution won't be as robust as I would want it to be. Ideal the `ProjectUser` should handle mutliple roles for more complex access control. UI/UX-wise, I will stick with what the Rails' scaffold generator provides, but in a real-world scenario, I would keep the CSS tidy, refactor the styling into specific classes using tailwind `@apply`. UI components could be extracted into partials or using gems like `view_component`.
+
+## End notes
+
+- CSS is a mess, would need refactoring. I prioritised functionality over design.
+- View tests are mostly missing, their current states are mostly what the Rails scaffold generator provides.
+- Users cannot delete, edit their own comments
+- When a user remove themselves from a project, they will be redirect to the project. It's an easy fix, but right now their redirect will lead to a 404 page.
+- The UI for the login/signup and list of projects is very basic. I focused my limited time on the project view.
+- The comment form should `require` the body field, but I thought I would keep it this way to show you that the app can display errors when the form is not valid. But ideally, we should avoid to make a request when we know it will fair ahead of time.
+- There is shared logic in the services `Projects::Create` and `Projects::Update` that could be extracted into a module.
+- As a validation, project should always have 1 user, but I didn't have time to implement it.
+- UX-wise, it would make more sense to have the comment form at the top of the history of events, and the order of events should be reversed.
+- Pagination should be put in place for both projects and history.
+- Containerise the app with Docker would be good idea.
+- The ability to logout is missing.
+- Would be great to create an event when a user is added or removed from a project.
+- Added user roles to a project giving them different permissions would be a great feature to have.
