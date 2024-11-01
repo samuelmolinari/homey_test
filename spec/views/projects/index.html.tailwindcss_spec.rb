@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "projects/index", type: :view do
+  let(:projects) { create_list(:project, 2) }
   before(:each) do
-    assign(:projects, create_list(:project, 2))
+    assign(:projects, projects)
   end
 
   it "renders a list of projects" do
     render
-    cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Status".to_s), count: 2
+    expect(rendered).to match(projects.first.name)
+    expect(rendered).to match(projects.first.status)
+    expect(rendered).to match(projects.last.name)
+    expect(rendered).to match(projects.last.status)
   end
 end

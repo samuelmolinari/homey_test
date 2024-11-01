@@ -9,7 +9,7 @@ RSpec.describe "projects/show", type: :view do
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Status/)
+    expect(rendered).to match(project.name)
+    expect(rendered).to match(project.status)
   end
 end

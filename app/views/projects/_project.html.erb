@@ -1,12 +1,6 @@
-<div id="<%= dom_id project %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
+<div id="<%= dom_id project %>" class="flex flex-row items-center justify-between">
+  <h1 class="text-xl font-bold">
     <%= project.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Status:</strong>
-    <%= project.status %>
-  </p>
-
+  </h1>
+  <span class="inline-block text-xs px-2 py-0.5 font-semibold rounded-full bg-purple-600 text-white"><%= project.status %></span>
 </div>
