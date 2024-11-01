@@ -9,13 +9,20 @@
       <%= link_to "Add user", new_project_user_path(@project), class: "rounded-md py-1 px-2 bg-blue-600 text-white block text-sm font-medium", data: { turbo_frame: '_top' } %>
     </div>
 
-    <div id="project_users" class="min-w-full">
+    <ul id="project_users" role="list" class="divide-y divide-gray-100">
       <% @project_users.each do |project_user| %>
-        <%= render project_user %>
+        <li class="flex justify-between py-5 gap-x-6">
+          <%= render project_user %>
+          <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p class="mt-1 text-gray-500 text-xs/5">Added <%= time_tag project_user.created_at, time_ago_in_words(project_user.created_at) %></p>
+            <p>
+              <%= link_to "Remove", project_user_path(@project, project_user), class: "underline text-xs", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?', turbo_frame: '_top' } %>
+            </p>
+          </div>
+        </li>
         <p>
-          <%= link_to "Remove", project_user_path(@project, project_user), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?', turbo_frame: '_top' } %>
         </p>
       <% end %>
-    </div>
+    </ul>
   </div>
 <% end %>
