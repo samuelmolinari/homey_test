@@ -5,7 +5,7 @@ class ProjectUsersController < ApplicationController
 
   # GET /project_users or /project_users.json
   def index
-    @project_users = @project.project_users
+    @project_users = @project.project_users.includes(:user)
   end
 
   # GET /project_users/new
