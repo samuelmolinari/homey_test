@@ -1,22 +1,21 @@
-<%= form_with(model: [project, comment], class: "contents") do |form| %>
-  <% if comment.errors.any? %>
-    <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+<%= turbo_frame_tag 'comment_form', class: 'w-full' do %>
+  <%= form_with(model: [project, comment], class: 'w-full flex flex-col gap-2', data: { turbo_frame: 'history' }) do |form| %>
+    <%= form.text_area :body, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 w-full" %>
 
-      <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <% if comment.errors.any? %>
+      <div id="error_explanation" class="px-3 py-2 font-medium text-red-500 rounded-lg bg-red-50">
+        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+        <ul>
+          <% comment.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="inline">
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
-
-  <div class="my-5">
-    <%= form.label :body %>
-    <%= form.text_area :body, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
 <% end %>

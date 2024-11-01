@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to new_project_comment_path(@project), notice: "Comment was successfully created." }
+        format.html { redirect_to project_history_index_path(@project) }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

@@ -55,7 +55,7 @@ RSpec.describe "/comments", type: :request do
 
       it "redirects to the new form" do
         post project_comments_url(project), params: { comment: valid_attributes }
-        expect(response).to redirect_to(new_project_comment_url(project))
+        expect(response).to redirect_to(project_history_index_url(project))
       end
     end
 

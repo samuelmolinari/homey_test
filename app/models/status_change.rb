@@ -8,6 +8,8 @@ class StatusChange < ApplicationRecord
   validates :to_status, presence: true, inclusion: { in: Project::STATUS }
   validate :from_status_cannot_be_same_as_to_status
 
+  delegate :email, :username, to: :user, prefix: true
+
   private
 
   def from_status_cannot_be_same_as_to_status

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :project_users, as: :users, only: %i[index new create destroy]
     resources :comments, except: %i[show index]
+    resources :history, only: %i[index]
   end
 
   devise_for :users

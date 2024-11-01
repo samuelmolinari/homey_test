@@ -1,0 +1,23 @@
+<%= turbo_frame_tag 'history' do %>
+  <div class="w-full">
+    <% content_for :title, "History" %>
+    <ul role="list" class="space-y-6">
+      <% @history.each do |event| %>
+        <li class="relative flex gap-x-4">
+          <div class="absolute top-0 left-0 flex justify-center w-6 -bottom-6">
+            <div class="w-px bg-gray-200"></div>
+          </div>
+          <div class="w-full">
+            <%= render event %>
+          </div>
+        </li>
+        <li>
+        </li>
+      <% end %>
+    </ul>
+    <div class="flex w-full mt-6 gap-x-3">
+      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-none w-6 h-6 rounded-full bg-gray-50">
+      <%= render "comments/form", comment: Comment.new, project: @project %>
+    </div>
+  </div>
+<% end %>

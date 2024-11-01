@@ -5,4 +5,6 @@ class Comment < ApplicationRecord
   belongs_to :project
 
   validates :body, presence: true
+
+  delegate :email, :username, to: :user, prefix: true
 end
